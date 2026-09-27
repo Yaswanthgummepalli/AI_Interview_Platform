@@ -1,2 +1,1 @@
-// React contexts will be exported here in future prompts (e.g. AuthContext)
-export {};
+export { default as AuthContext, AuthProvider, useAuth } from './AuthContext';

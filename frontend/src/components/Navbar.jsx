@@ -1,9 +1,17 @@
 import React from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
 import HealthStatusBadge from './HealthStatusBadge';
 
 const Navbar = () => {
   const location = useLocation();
+  const navigate = useNavigate();
+  const { user, isAuthenticated, logout } = useAuth();
+
+  const handleLogout = async () => {
+    await logout();
+    navigate('/');
+  };
 
   return (
     <header className="navbar">
@@ -29,21 +37,37 @@ const Navbar = () => {
               How It Works
             </a>
           </li>
-          <li>
-            <Link to="/dashboard" className={`nav-link ${location.pathname === '/dashboard' ? 'active' : ''}`}>
-              Dashboard
-            </Link>
-          </li>
+          {isAuthenticated && (
+            <li>
+              <Link to="/dashboard" className={`nav-link ${location.pathname === '/dashboard' ? 'active' : ''}`}>
+                Dashboard
+              </Link>
+            </li>
+          )}
         </ul>
 
         <div className="nav-actions">
           <HealthStatusBadge />
-          <Link to="/login" className="btn btn-outline">
-            Login
-          </Link>
-          <Link to="/register" className="btn btn-primary">
-            Get Started
-          </Link>
+          
+          {isAuthenticated ? (
+            <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+              <span style={{ fontSize: '0.9rem', color: 'var(--text-main)', fontWeight: 500 }}>
+                👤 {user?.name || 'User'}
+              </span>
+              <button onClick={handleLogout} className="btn btn-outline" style={{ padding: '0.5rem 1rem' }}>
+                Logout
+              </button>
+            </div>
+          ) : (
+            <>
+              <Link to="/login" className="btn btn-outline">
+                Login
+              </Link>
+              <Link to="/register" className="btn btn-primary">
+                Get Started
+              </Link>
+            </>
+          )}
         </div>
       </div>
     </header>

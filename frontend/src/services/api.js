@@ -10,14 +10,26 @@ const api = axios.create({
   timeout: 10000
 });
 
+// Request interceptor to attach JWT token
+api.interceptors.request.use(
+  (config) => {
+    const token = localStorage.getItem('interviewai_token');
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`;
+    }
+    return config;
+  },
+  (error) => Promise.reject(error)
+);
+
 // Response interceptor for generic error handling
 api.interceptors.response.use(
   (response) => response.data,
   (error) => {
     const customError = {
-      message: error.response?.data?.message || error.message || 'Network Error',
+      message: error.response?.data?.message || error.message || 'An unexpected error occurred',
       status: error.response?.status || 500,
-      details: error.response?.data || null
+      details: error.response?.data?.errors || null
     };
     return Promise.reject(customError);
   }

@@ -41,6 +41,11 @@ export const AuthProvider = ({ children }) => {
     setToken(null);
   };
 
+  const updateUserData = (updatedUser) => {
+    setUser(updatedUser);
+    localStorage.setItem('interviewai_user', JSON.stringify(updatedUser));
+  };
+
   const handleRegister = async (userData) => {
     try {
       const response = await registerUser(userData);
@@ -94,6 +99,7 @@ export const AuthProvider = ({ children }) => {
     token,
     loading,
     isAuthenticated: !!user && !!token,
+    updateUserData,
     register: handleRegister,
     login: handleLogin,
     logout: handleLogout

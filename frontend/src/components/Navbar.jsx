@@ -38,11 +38,18 @@ const Navbar = () => {
             </a>
           </li>
           {isAuthenticated && (
-            <li>
-              <Link to="/dashboard" className={`nav-link ${location.pathname === '/dashboard' ? 'active' : ''}`}>
-                Dashboard
-              </Link>
-            </li>
+            <>
+              <li>
+                <Link to="/dashboard" className={`nav-link ${location.pathname === '/dashboard' ? 'active' : ''}`}>
+                  Dashboard
+                </Link>
+              </li>
+              <li>
+                <Link to="/profile" className={`nav-link ${location.pathname === '/profile' ? 'active' : ''}`}>
+                  Profile
+                </Link>
+              </li>
+            </>
           )}
         </ul>
 
@@ -50,11 +57,24 @@ const Navbar = () => {
           <HealthStatusBadge />
           
           {isAuthenticated ? (
-            <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-              <span style={{ fontSize: '0.9rem', color: 'var(--text-main)', fontWeight: 500 }}>
-                👤 {user?.name || 'User'}
-              </span>
-              <button onClick={handleLogout} className="btn btn-outline" style={{ padding: '0.5rem 1rem' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+              <Link to="/profile" style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', fontSize: '0.9rem', color: 'var(--text-main)', fontWeight: 500 }}>
+                <span>👤 {user?.name || 'User'}</span>
+                {user?.role === 'ADMIN' && (
+                  <span style={{
+                    fontSize: '0.65rem',
+                    background: 'rgba(239, 68, 68, 0.2)',
+                    color: '#fca5a5',
+                    border: '1px solid rgba(239, 68, 68, 0.4)',
+                    padding: '0.1rem 0.4rem',
+                    borderRadius: '4px',
+                    fontWeight: 700
+                  }}>
+                    ADMIN
+                  </span>
+                )}
+              </Link>
+              <button onClick={handleLogout} className="btn btn-outline" style={{ padding: '0.4rem 0.85rem' }}>
                 Logout
               </button>
             </div>

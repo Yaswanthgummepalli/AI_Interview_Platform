@@ -2,12 +2,16 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { AuthProvider } from './context/AuthContext';
 import ProtectedRoute from './components/ProtectedRoute';
+import AdminRoute from './components/AdminRoute';
 
 import LandingPage from './pages/LandingPage';
 import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
 import DashboardPage from './pages/DashboardPage';
 import ProfilePage from './pages/ProfilePage';
+import UserQuestionBankPage from './pages/UserQuestionBankPage';
+import QuestionDetailPage from './pages/QuestionDetailPage';
+import AdminQuestionManagementPage from './pages/AdminQuestionManagementPage';
 import NotFoundPage from './pages/NotFoundPage';
 
 function App() {
@@ -18,6 +22,8 @@ function App() {
           <Route path="/" element={<LandingPage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<RegisterPage />} />
+          
+          {/* Authenticated Candidate Routes */}
           <Route
             path="/dashboard"
             element={
@@ -34,6 +40,33 @@ function App() {
               </ProtectedRoute>
             }
           />
+          <Route
+            path="/questions"
+            element={
+              <ProtectedRoute>
+                <UserQuestionBankPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/questions/:id"
+            element={
+              <ProtectedRoute>
+                <QuestionDetailPage />
+              </ProtectedRoute>
+            }
+          />
+
+          {/* Admin-only Routes */}
+          <Route
+            path="/admin/questions"
+            element={
+              <AdminRoute>
+                <AdminQuestionManagementPage />
+              </AdminRoute>
+            }
+          />
+
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </Router>

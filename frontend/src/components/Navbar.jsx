@@ -45,6 +45,18 @@ const Navbar = () => {
                 </Link>
               </li>
               <li>
+                <Link to="/questions" className={`nav-link ${location.pathname.startsWith('/questions') ? 'active' : ''}`}>
+                  Questions
+                </Link>
+              </li>
+              {user?.role === 'ADMIN' && (
+                <li>
+                  <Link to="/admin/questions" className={`nav-link ${location.pathname === '/admin/questions' ? 'active' : ''}`}>
+                    Admin Questions
+                  </Link>
+                </li>
+              )}
+              <li>
                 <Link to="/profile" className={`nav-link ${location.pathname === '/profile' ? 'active' : ''}`}>
                   Profile
                 </Link>

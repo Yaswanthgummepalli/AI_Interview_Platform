@@ -12,6 +12,9 @@ import ProfilePage from './pages/ProfilePage';
 import UserQuestionBankPage from './pages/UserQuestionBankPage';
 import QuestionDetailPage from './pages/QuestionDetailPage';
 import AdminQuestionManagementPage from './pages/AdminQuestionManagementPage';
+import AdminAssessmentManagementPage from './pages/AdminAssessmentManagementPage';
+import UserAssessmentListPage from './pages/UserAssessmentListPage';
+import AssessmentDetailPage from './pages/AssessmentDetailPage';
 import NotFoundPage from './pages/NotFoundPage';
 
 function App() {
@@ -56,6 +59,22 @@ function App() {
               </ProtectedRoute>
             }
           />
+          <Route
+            path="/assessments"
+            element={
+              <ProtectedRoute>
+                <UserAssessmentListPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/assessments/:id"
+            element={
+              <ProtectedRoute>
+                <AssessmentDetailPage />
+              </ProtectedRoute>
+            }
+          />
 
           {/* Admin-only Routes */}
           <Route
@@ -63,6 +82,14 @@ function App() {
             element={
               <AdminRoute>
                 <AdminQuestionManagementPage />
+              </AdminRoute>
+            }
+          />
+          <Route
+            path="/admin/assessments"
+            element={
+              <AdminRoute>
+                <AdminAssessmentManagementPage />
               </AdminRoute>
             }
           />

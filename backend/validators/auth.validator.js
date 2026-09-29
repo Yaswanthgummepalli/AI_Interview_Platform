@@ -29,6 +29,10 @@ const validateRegister = (data) => {
     errors.push('Password and confirmPassword do not match');
   }
 
+  if (targetRole !== undefined && (!targetRole || typeof targetRole !== 'string' || !targetRole.trim())) {
+    errors.push('Target role is invalid');
+  }
+
   if (experienceLevel && !['BEGINNER', 'INTERMEDIATE', 'ADVANCED'].includes(experienceLevel)) {
     errors.push('Experience level must be BEGINNER, INTERMEDIATE, or ADVANCED');
   }
@@ -41,7 +45,7 @@ const validateRegister = (data) => {
     name: name.trim(),
     email: email.trim().toLowerCase(),
     password,
-    targetRole: targetRole ? targetRole.trim() : 'Full Stack Developer',
+    targetRole: targetRole && targetRole.trim() ? targetRole.trim() : 'Full Stack Developer',
     experienceLevel: experienceLevel || 'BEGINNER'
   };
 };

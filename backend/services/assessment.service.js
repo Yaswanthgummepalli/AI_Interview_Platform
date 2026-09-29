@@ -205,19 +205,23 @@ class AssessmentService {
       .populate('answers.question');
 
     if (existing) {
-      // sanitize assessment questions for non-admin
+      const durationMinutes = existing.assessment?.duration || assessment.duration || 0;
+      const endTs = new Date(existing.startedAt).getTime() + durationMinutes * 60 * 1000;
+      const remainingMs = Math.max(endTs - Date.now(), 0);
+
       existing.assessment = assessment.toSafeObject('USER');
-      return { attempt: existing };
+      return { attempt: existing, remainingMs };
     }
 
     // Initialize answers skeleton from assessment questions
     const answers = (assessment.questions || []).map((q) => ({ question: q._id, answer: '' }));
+    const startedAt = new Date();
 
     const attempt = await AssessmentAttempt.create({
       user: userId,
       assessment: assessmentId,
       answers,
-      startedAt: new Date(),
+      startedAt,
       status: 'IN_PROGRESS'
     });
 
@@ -226,7 +230,11 @@ class AssessmentService {
 
     attempt.assessment = assessment.toSafeObject('USER');
 
-    return { attempt };
+    const durationMinutes = assessment.duration || 0;
+    const endTs = new Date(startedAt).getTime() + durationMinutes * 60 * 1000;
+    const remainingMs = Math.max(endTs - Date.now(), 0);
+
+    return { attempt, remainingMs };
   }
 
   async getAttemptById(attemptId, userId) {

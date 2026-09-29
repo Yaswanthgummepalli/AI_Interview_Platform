@@ -8,9 +8,17 @@ const TakeAssessmentPage = () => {
   const navigate = useNavigate();
   const [attempt, setAttempt] = useState(null);
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [remainingMs, setRemainingMs] = useState(null);
+  const [remainingMs, setRemainingMs] = useState(0);
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
+
+  const formatTimeLeft = (ms) => {
+    const safeMs = Math.max(0, Number(ms) || 0);
+    const totalSeconds = Math.ceil(safeMs / 1000);
+    const minutes = String(Math.floor(totalSeconds / 60)).padStart(2, '0');
+    const seconds = String(totalSeconds % 60).padStart(2, '0');
+    return `${minutes}:${seconds}`;
+  };
 
   useEffect(() => {
     const start = async () => {
@@ -18,8 +26,12 @@ const TakeAssessmentPage = () => {
       try {
         const res = await startAssessmentApi(id);
         if (res && res.success && res.data?.attempt) {
+          const startedAt = res.data.attempt.startedAt || new Date();
+          const durationMinutes = Number(res.data.attempt.assessment?.duration || 0);
+          const endTime = new Date(startedAt).getTime() + durationMinutes * 60 * 1000;
+          const nextRemaining = Number.isFinite(res.data.remainingMs) ? Number(res.data.remainingMs) : Math.max(endTime - Date.now(), 0);
           setAttempt(res.data.attempt);
-          setRemainingMs(res.data.remainingMs || null);
+          setRemainingMs(nextRemaining);
         }
       } catch (err) {
         console.error(err);
@@ -35,22 +47,25 @@ const TakeAssessmentPage = () => {
   }, [id]);
 
   useEffect(() => {
-    if (!attempt || remainingMs === null) return;
-    // simple countdown
+    if (!attempt || !attempt.startedAt) return;
+
     const interval = setInterval(() => {
-      setRemainingMs((prev) => {
-        if (prev <= 1000) {
-          clearInterval(interval);
-          handleSubmit();
-          return 0;
-        }
-        return prev - 1000;
-      });
+      const durationMinutes = Number(attempt.assessment?.duration || 0);
+      const startedAt = new Date(attempt.startedAt).getTime();
+      const endTime = startedAt + durationMinutes * 60 * 1000;
+      const updatedRemaining = Math.max(endTime - Date.now(), 0);
+
+      setRemainingMs(updatedRemaining);
+
+      if (updatedRemaining <= 1000) {
+        clearInterval(interval);
+        handleSubmit();
+      }
     }, 1000);
 
     return () => clearInterval(interval);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [attempt, remainingMs]);
+  }, [attempt]);
 
   const handleAnswerChange = (questionId, value) => {
     setAttempt((prev) => {
@@ -102,7 +117,9 @@ const TakeAssessmentPage = () => {
       <div style={{ maxWidth: 900, margin: '2rem auto' }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '1rem' }}>
           <h2>{attempt.assessment.title}</h2>
-          <div>Time left: {remainingMs ? Math.ceil(remainingMs / 1000) + 's' : '—'}</div>
+          <div style={{ fontWeight: 700, color: '#a5b4fc' }}>
+            Time left: {formatTimeLeft(remainingMs)}
+          </div>
         </div>
 
         <div style={{ border: '1px solid var(--border-color)', padding: '1rem', borderRadius: '8px', background: 'var(--bg-card)' }}>

@@ -12,6 +12,14 @@ const validateUpdateProfile = (data) => {
     }
   }
 
+  if (targetRole !== undefined) {
+    if (typeof targetRole !== 'string' || !targetRole.trim()) {
+      errors.push('Target role is invalid');
+    } else if (targetRole.trim().length > 100) {
+      errors.push('Target role cannot exceed 100 characters');
+    }
+  }
+
   if (experienceLevel !== undefined) {
     if (!['BEGINNER', 'INTERMEDIATE', 'ADVANCED'].includes(experienceLevel)) {
       errors.push('Experience level must be BEGINNER, INTERMEDIATE, or ADVANCED');
@@ -22,7 +30,6 @@ const validateUpdateProfile = (data) => {
     throw new ApiError(400, errors[0], errors);
   }
 
-  // Filter out any unauthorized fields (role, email, password)
   const sanitized = {};
   if (name !== undefined) sanitized.name = name.trim();
   if (targetRole !== undefined) sanitized.targetRole = targetRole.trim();

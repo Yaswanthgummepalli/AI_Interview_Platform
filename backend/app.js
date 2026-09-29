@@ -3,13 +3,17 @@ const corsMiddleware = require('./config/cors');
 const apiRoutes = require('./routes');
 const errorMiddleware = require('./middlewares/error.middleware');
 const notFoundMiddleware = require('./middlewares/notFound.middleware');
+const securityMiddleware = require('./middlewares/security.middleware');
 
 const app = express();
 
+app.disable('x-powered-by');
+
 // Middlewares
+app.use(securityMiddleware);
 app.use(corsMiddleware);
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+app.use(express.json({ limit: '1mb' }));
+app.use(express.urlencoded({ extended: true, limit: '1mb' }));
 
 // API Routes
 app.use('/api', apiRoutes);

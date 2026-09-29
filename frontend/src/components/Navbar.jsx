@@ -69,90 +69,97 @@ const Navbar = () => {
                 </Link>
               </li>
               {user?.role === 'ADMIN' && (
-                <li style={{ position: 'relative' }}>
-                  <button
-                    onClick={() => setAdminDropdownOpen(!adminDropdownOpen)}
-                    className={`nav-link ${isAdminActive() ? 'active' : ''}`}
-                    style={{
-                      background: 'none',
-                      border: 'none',
-                      cursor: 'pointer',
-                      padding: '0.5rem 0',
-                      display: 'flex',
-                      alignItems: 'center',
-                      gap: '0.4rem',
-                      fontSize: '0.95rem'
-                    }}
-                  >
-                    Admin
-                    <span style={{ fontSize: '0.7rem' }}>▼</span>
-                  </button>
-                  {adminDropdownOpen && (
-                    <ul style={{
-                      position: 'absolute',
-                      top: '100%',
-                      left: 0,
-                      background: 'var(--card-bg)',
-                      border: '1px solid var(--border)',
-                      borderRadius: 'var(--radius-md)',
-                      minWidth: '180px',
-                      marginTop: '0.5rem',
-                      padding: '0.5rem 0',
-                      listStyle: 'none',
-                      zIndex: 1000,
-                      boxShadow: '0 4px 12px rgba(0, 0, 0, 0.3)'
-                    }}>
-                      <li>
-                        <Link
-                          to="/admin/questions"
-                          className="nav-link"
-                          onClick={() => setAdminDropdownOpen(false)}
-                          style={{
-                            display: 'block',
-                            padding: '0.6rem 1rem',
-                            fontSize: '0.9rem',
-                            borderRadius: '0',
-                            backgroundColor: location.pathname === '/admin/questions' ? 'rgba(139, 92, 246, 0.1)' : 'transparent'
-                          }}
-                        >
-                          Questions
-                        </Link>
-                      </li>
-                      <li>
-                        <Link
-                          to="/admin/assessments"
-                          className="nav-link"
-                          onClick={() => setAdminDropdownOpen(false)}
-                          style={{
-                            display: 'block',
-                            padding: '0.6rem 1rem',
-                            fontSize: '0.9rem',
-                            borderRadius: '0',
-                            backgroundColor: location.pathname === '/admin/assessments' ? 'rgba(139, 92, 246, 0.1)' : 'transparent'
-                          }}
-                        >
-                          Assessments
-                        </Link>
-                      </li>
-                      <li>
-                        <Link
-                          to="/admin/attempts"
-                          className="nav-link"
-                          onClick={() => setAdminDropdownOpen(false)}
-                          style={{
-                            display: 'block',
-                            padding: '0.6rem 1rem',
-                            fontSize: '0.9rem',
-                            borderRadius: '0',
-                            backgroundColor: location.pathname === '/admin/attempts' ? 'rgba(139, 92, 246, 0.1)' : 'transparent'
-                          }}
-                        >
-                          Attempts
-                        </Link>
-                      </li>
-                    </ul>
-                  )}
-                </li>
+                <>
+                  <li>
+                    <Link to="/admin/dashboard" className={`nav-link ${location.pathname === '/admin/dashboard' ? 'active' : ''}`}>
+                      Admin Dashboard
+                    </Link>
+                  </li>
+                  <li style={{ position: 'relative' }}>
+                    <button
+                      onClick={() => setAdminDropdownOpen(!adminDropdownOpen)}
+                      className={`nav-link ${isAdminActive() ? 'active' : ''}`}
+                      style={{
+                        background: 'none',
+                        border: 'none',
+                        cursor: 'pointer',
+                        padding: '0.5rem 0',
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: '0.4rem',
+                        fontSize: '0.95rem'
+                      }}
+                    >
+                      Admin
+                      <span style={{ fontSize: '0.7rem' }}>▼</span>
+                    </button>
+                    {adminDropdownOpen && (
+                      <ul style={{
+                        position: 'absolute',
+                        top: '100%',
+                        left: 0,
+                        background: 'var(--card-bg)',
+                        border: '1px solid var(--border)',
+                        borderRadius: 'var(--radius-md)',
+                        minWidth: '180px',
+                        marginTop: '0.5rem',
+                        padding: '0.5rem 0',
+                        listStyle: 'none',
+                        zIndex: 1000,
+                        boxShadow: '0 4px 12px rgba(0, 0, 0, 0.3)'
+                      }}>
+                        <li>
+                          <Link
+                            to="/admin/questions"
+                            className="nav-link"
+                            onClick={() => setAdminDropdownOpen(false)}
+                            style={{
+                              display: 'block',
+                              padding: '0.6rem 1rem',
+                              fontSize: '0.9rem',
+                              borderRadius: '0',
+                              backgroundColor: location.pathname === '/admin/questions' ? 'rgba(139, 92, 246, 0.1)' : 'transparent'
+                            }}
+                          >
+                            Questions
+                          </Link>
+                        </li>
+                        <li>
+                          <Link
+                            to="/admin/assessments"
+                            className="nav-link"
+                            onClick={() => setAdminDropdownOpen(false)}
+                            style={{
+                              display: 'block',
+                              padding: '0.6rem 1rem',
+                              fontSize: '0.9rem',
+                              borderRadius: '0',
+                              backgroundColor: location.pathname === '/admin/assessments' ? 'rgba(139, 92, 246, 0.1)' : 'transparent'
+                            }}
+                          >
+                            Assessments
+                          </Link>
+                        </li>
+                        <li>
+                          <Link
+                            to="/admin/attempts"
+                            className="nav-link"
+                            onClick={() => setAdminDropdownOpen(false)}
+                            style={{
+                              display: 'block',
+                              padding: '0.6rem 1rem',
+                              fontSize: '0.9rem',
+                              borderRadius: '0',
+                              backgroundColor: location.pathname === '/admin/attempts' ? 'rgba(139, 92, 246, 0.1)' : 'transparent'
+                            }}
+                          >
+                            Attempts
+                          </Link>
+                        </li>
+                      </ul>
+                    )}
+                  </li>
+                </>
               )}
               <li>
                 <Link to="/profile" className={`nav-link ${location.pathname === '/profile' ? 'active' : ''}`}>

@@ -18,6 +18,7 @@ import AssessmentDetailPage from './pages/AssessmentDetailPage';
 import TakeAssessmentPage from './pages/TakeAssessmentPage';
 import AssessmentResultPage from './pages/AssessmentResultPage';
 import AttemptHistoryPage from './pages/AttemptHistoryPage';
+import AdminDashboardPage from './pages/AdminDashboardPage';
 import AdminAttemptsPage from './pages/AdminAttemptsPage';
 import NotFoundPage from './pages/NotFoundPage';
 
@@ -105,6 +106,14 @@ function App() {
           />
 
           {/* Admin-only Routes */}
+          <Route
+            path="/admin/dashboard"
+            element={
+              <AdminRoute>
+                <AdminDashboardPage />
+              </AdminRoute>
+            }
+          />
           <Route
             path="/admin/questions"
             element={

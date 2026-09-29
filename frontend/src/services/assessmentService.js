@@ -57,3 +57,11 @@ export const getUserAttemptsApi = async () => {
 export const getAdminAttemptsApi = async () => {
   return await api.get(`/admin/attempts`);
 };
+
+export const getUserDashboardApi = async () => {
+  return await api.get('/dashboard/user');
+};
+
+export const getAdminDashboardApi = async () => {
+  return await api.get('/dashboard/admin');
+};

@@ -115,9 +115,9 @@ const AssessmentDetailPage = () => {
             </div>
 
             <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
-              <button type="button" className="btn btn-primary" disabled style={{ opacity: 0.7, cursor: 'not-allowed' }}>
-                Start Assessment (Coming Soon)
-              </button>
+              <a href={`/assessments/${assessment._id}/take`} className="btn btn-primary">
+                Start Assessment
+              </a>
             </div>
           </div>
         ) : null}

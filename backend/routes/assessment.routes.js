@@ -7,6 +7,14 @@ const { authorizeRoles } = require('../middlewares/role.middleware');
 // All assessment endpoints require authentication
 router.use(protect);
 
+// Assessment taking endpoints
+router.post('/:id/start', assessmentController.startAssessment);
+router.get('/attempts/:attemptId', assessmentController.getAttemptById);
+router.put('/attempts/:attemptId/answer', assessmentController.saveAttemptAnswer);
+router.post('/attempts/:attemptId/submit', assessmentController.submitAttempt);
+router.get('/attempts/:attemptId/result', assessmentController.getAttemptResult);
+router.get('/my/attempts', assessmentController.getUserAttempts);
+
 // Candidate & Admin readable endpoints
 router.get('/', assessmentController.getAssessments);
 router.get('/:id', assessmentController.getAssessmentById);

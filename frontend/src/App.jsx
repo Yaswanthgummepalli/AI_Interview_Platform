@@ -15,6 +15,10 @@ import AdminQuestionManagementPage from './pages/AdminQuestionManagementPage';
 import AdminAssessmentManagementPage from './pages/AdminAssessmentManagementPage';
 import UserAssessmentListPage from './pages/UserAssessmentListPage';
 import AssessmentDetailPage from './pages/AssessmentDetailPage';
+import TakeAssessmentPage from './pages/TakeAssessmentPage';
+import AssessmentResultPage from './pages/AssessmentResultPage';
+import AttemptHistoryPage from './pages/AttemptHistoryPage';
+import AdminAttemptsPage from './pages/AdminAttemptsPage';
 import NotFoundPage from './pages/NotFoundPage';
 
 function App() {
@@ -75,6 +79,30 @@ function App() {
               </ProtectedRoute>
             }
           />
+          <Route
+            path="/assessments/:id/take"
+            element={
+              <ProtectedRoute>
+                <TakeAssessmentPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/assessments/:id/result/:attemptId"
+            element={
+              <ProtectedRoute>
+                <AssessmentResultPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/attempts"
+            element={
+              <ProtectedRoute>
+                <AttemptHistoryPage />
+              </ProtectedRoute>
+            }
+          />
 
           {/* Admin-only Routes */}
           <Route
@@ -90,6 +118,14 @@ function App() {
             element={
               <AdminRoute>
                 <AdminAssessmentManagementPage />
+              </AdminRoute>
+            }
+          />
+          <Route
+            path="/admin/attempts"
+            element={
+              <AdminRoute>
+                <AdminAttemptsPage />
               </AdminRoute>
             }
           />

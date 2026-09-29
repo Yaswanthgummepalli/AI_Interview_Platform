@@ -27,3 +27,33 @@ export const publishAssessmentApi = async (id) => {
 export const unpublishAssessmentApi = async (id) => {
   return await api.patch(`/assessments/${id}/unpublish`);
 };
+
+// Assessment taking APIs
+export const startAssessmentApi = async (assessmentId) => {
+  return await api.post(`/assessments/${assessmentId}/start`);
+};
+
+export const getAttemptApi = async (attemptId) => {
+  return await api.get(`/assessments/attempts/${attemptId}`);
+};
+
+export const saveAnswerApi = async (attemptId, payload) => {
+  return await api.put(`/assessments/attempts/${attemptId}/answer`, payload);
+};
+
+export const submitAttemptApi = async (attemptId) => {
+  return await api.post(`/assessments/attempts/${attemptId}/submit`);
+};
+
+// Result and history APIs
+export const getAttemptResultApi = async (attemptId) => {
+  return await api.get(`/assessments/attempts/${attemptId}/result`);
+};
+
+export const getUserAttemptsApi = async () => {
+  return await api.get(`/assessments/my/attempts`);
+};
+
+export const getAdminAttemptsApi = async () => {
+  return await api.get(`/admin/attempts`);
+};

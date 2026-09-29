@@ -34,6 +34,87 @@ const getAssessmentById = async (req, res, next) => {
   }
 };
 
+const startAssessment = async (req, res, next) => {
+  try {
+    const result = await assessmentService.startAssessment(req.params.id, req.user._id);
+    return res
+      .status(200)
+      .json(new ApiResponse(200, result, 'Assessment started successfully'));
+  } catch (error) {
+    next(error);
+  }
+};
+
+const getAttemptById = async (req, res, next) => {
+  try {
+    const result = await assessmentService.getAttemptById(req.params.attemptId, req.user._id);
+    return res
+      .status(200)
+      .json(new ApiResponse(200, result, 'Assessment attempt retrieved successfully'));
+  } catch (error) {
+    next(error);
+  }
+};
+
+const saveAttemptAnswer = async (req, res, next) => {
+  try {
+    const result = await assessmentService.saveAttemptAnswer(
+      req.params.attemptId,
+      req.user._id,
+      req.body
+    );
+    return res
+      .status(200)
+      .json(new ApiResponse(200, result, 'Answer saved successfully'));
+  } catch (error) {
+    next(error);
+  }
+};
+
+const submitAttempt = async (req, res, next) => {
+  try {
+    const result = await assessmentService.submitAttempt(req.params.attemptId, req.user._id);
+    return res
+      .status(200)
+      .json(new ApiResponse(200, result.result || result, 'Assessment submitted successfully'));
+  } catch (error) {
+    next(error);
+  }
+};
+
+const getAttemptResult = async (req, res, next) => {
+  try {
+    const result = await assessmentService.getAttemptResult(req.params.attemptId, req.user._id);
+    return res
+      .status(200)
+      .json(new ApiResponse(200, result, 'Assessment result retrieved successfully'));
+  } catch (error) {
+    next(error);
+  }
+};
+
+const getUserAttempts = async (req, res, next) => {
+  try {
+    const attempts = await assessmentService.getUserAttempts(req.user._id);
+    return res
+      .status(200)
+      .json(new ApiResponse(200, { attempts }, 'User attempts retrieved successfully'));
+  } catch (error) {
+    next(error);
+  }
+};
+
+const getAdminAttempts = async (req, res, next) => {
+  try {
+    const attempts = await assessmentService.getAdminAttempts();
+    return res
+      .status(200)
+      .json(new ApiResponse(200, { attempts }, 'Admin attempts retrieved successfully'));
+  } catch (error) {
+    next(error);
+  }
+};
+
 const updateAssessment = async (req, res, next) => {
   try {
     const assessment = await assessmentService.updateAssessment(req.params.id, req.body, req.user.role);
@@ -82,6 +163,13 @@ module.exports = {
   createAssessment,
   getAssessments,
   getAssessmentById,
+  startAssessment,
+  getAttemptById,
+  saveAttemptAnswer,
+  submitAttempt,
+  getAttemptResult,
+  getUserAttempts,
+  getAdminAttempts,
   updateAssessment,
   deleteAssessment,
   publishAssessment,

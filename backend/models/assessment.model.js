@@ -62,6 +62,7 @@ const assessmentSchema = new mongoose.Schema(
 );
 
 // Helper method to format assessment based on user role (hides correctAnswer inside questions for normal USERs)
+//cicd test
 assessmentSchema.methods.toSafeObject = function (userRole = 'USER') {
   const obj = this.toObject();
 

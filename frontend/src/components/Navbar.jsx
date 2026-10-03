@@ -8,6 +8,7 @@ const Navbar = () => {
   const { user, isAuthenticated, logout } = useAuth();
   const [adminDropdownOpen, setAdminDropdownOpen] = useState(false);
   const [userDropdownOpen, setUserDropdownOpen] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const handleLogout = async () => {
     const confirmed = window.confirm('Are you sure you want to log out?');
@@ -29,21 +30,32 @@ const Navbar = () => {
           <span>Interview<span className="gradient-text">AI</span></span>
         </Link>
 
-        <ul className="nav-links">
+        <button
+          type="button"
+          className="mobile-menu-toggle"
+          aria-label="Toggle menu"
+          aria-expanded={mobileMenuOpen}
+          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+        >
+          <span>{mobileMenuOpen ? 'Close' : 'Menu'}</span>
+          <span className="mobile-menu-icon">☰</span>
+        </button>
+
+        <ul className={`nav-links ${mobileMenuOpen ? 'mobile-open' : ''}`}>
           {!isAuthenticated && (
             <>
               <li>
-                <Link to="/" className={`nav-link ${location.pathname === '/' ? 'active' : ''}`}>
+                <Link to="/" className={`nav-link ${location.pathname === '/' ? 'active' : ''}`} onClick={() => setMobileMenuOpen(false)}>
                   Home
                 </Link>
               </li>
               <li>
-                <a href="/#features" className="nav-link">
+                <a href="/#features" className="nav-link" onClick={() => setMobileMenuOpen(false)}>
                   Features
                 </a>
               </li>
               <li>
-                <a href="/#how-it-works" className="nav-link">
+                <a href="/#how-it-works" className="nav-link" onClick={() => setMobileMenuOpen(false)}>
                   How It Works
                 </a>
               </li>
@@ -53,22 +65,22 @@ const Navbar = () => {
           {isAuthenticated && (
             <>
               <li>
-                <Link to="/dashboard" className={`nav-link ${location.pathname === '/dashboard' ? 'active' : ''}`}>
+                <Link to="/dashboard" className={`nav-link ${location.pathname === '/dashboard' ? 'active' : ''}`} onClick={() => setMobileMenuOpen(false)}>
                   Dashboard
                 </Link>
               </li>
               <li>
-                <Link to="/questions" className={`nav-link ${location.pathname.startsWith('/questions') ? 'active' : ''}`}>
+                <Link to="/questions" className={`nav-link ${location.pathname.startsWith('/questions') ? 'active' : ''}`} onClick={() => setMobileMenuOpen(false)}>
                   Questions
                 </Link>
               </li>
               <li>
-                <Link to="/assessments" className={`nav-link ${location.pathname.startsWith('/assessments') ? 'active' : ''}`}>
+                <Link to="/assessments" className={`nav-link ${location.pathname.startsWith('/assessments') ? 'active' : ''}`} onClick={() => setMobileMenuOpen(false)}>
                   Assessments
                 </Link>
               </li>
               <li>
-                <Link to="/attempts" className={`nav-link ${location.pathname === '/attempts' ? 'active' : ''}`}>
+                <Link to="/attempts" className={`nav-link ${location.pathname === '/attempts' ? 'active' : ''}`} onClick={() => setMobileMenuOpen(false)}>
                   Attempts
                 </Link>
               </li>
@@ -111,7 +123,10 @@ const Navbar = () => {
                         <Link
                           to="/admin/dashboard"
                           className="nav-link"
-                          onClick={() => setAdminDropdownOpen(false)}
+                          onClick={() => {
+                            setAdminDropdownOpen(false);
+                            setMobileMenuOpen(false);
+                          }}
                           style={{
                             display: 'block',
                             padding: '0.6rem 1rem',
@@ -127,7 +142,10 @@ const Navbar = () => {
                         <Link
                           to="/admin/questions"
                           className="nav-link"
-                          onClick={() => setAdminDropdownOpen(false)}
+                          onClick={() => {
+                            setAdminDropdownOpen(false);
+                            setMobileMenuOpen(false);
+                          }}
                           style={{
                             display: 'block',
                             padding: '0.6rem 1rem',
@@ -143,7 +161,10 @@ const Navbar = () => {
                         <Link
                           to="/admin/assessments"
                           className="nav-link"
-                          onClick={() => setAdminDropdownOpen(false)}
+                          onClick={() => {
+                            setAdminDropdownOpen(false);
+                            setMobileMenuOpen(false);
+                          }}
                           style={{
                             display: 'block',
                             padding: '0.6rem 1rem',
@@ -159,7 +180,10 @@ const Navbar = () => {
                         <Link
                           to="/admin/attempts"
                           className="nav-link"
-                          onClick={() => setAdminDropdownOpen(false)}
+                          onClick={() => {
+                            setAdminDropdownOpen(false);
+                            setMobileMenuOpen(false);
+                          }}
                           style={{
                             display: 'block',
                             padding: '0.6rem 1rem',

@@ -2,6 +2,25 @@
   padding: 3rem 0;
 }
 
+.question-filter-bar {
+  overflow: hidden;
+}
+
+.question-filter-form {
+  width: 100%;
+}
+
+.question-search-input,
+.question-filter-select {
+  min-width: 0;
+}
+
+.question-filter-actions {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
 .eyebrow {
   margin: 0 0 0.5rem;
   color: #a78bfa;
@@ -264,39 +283,60 @@
   .attempt-score {
     text-align: left;
   }
+}
 
-  .profile-grid {
-    grid-template-columns: 1fr !important;
-    gap: 1.25rem !important;
+@media (max-width: 720px) {
+  .question-filter-form {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
-  .profile-card {
-    padding: 1.25rem !important;
+  .question-search-input {
+    grid-column: 1 / -1;
   }
 
-  .profile-card h3 {
-    font-size: 1.15rem !important;
-    margin-bottom: 1rem !important;
+  .question-filter-select,
+  .question-technology,
+  .question-difficulty,
+  .question-type {
+    min-width: 0;
   }
 
-  .profile-card .auth-form {
-    gap: 0.9rem !important;
+  .question-filter-actions {
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    width: 100%;
   }
 
-  .profile-card .form-group {
-    margin-bottom: 0.1rem;
+  .question-search-btn,
+  .question-reset-btn {
+    width: 100%;
+    justify-content: center;
   }
 
-  .profile-card .form-label {
-    font-size: 0.8rem;
+  .question-search-btn {
+    min-height: 48px;
   }
 
-  .profile-card .form-input {
-    min-height: 46px;
-    font-size: 0.95rem;
+  .question-search-input,
+  .question-filter-select,
+  .question-search-btn,
+  .question-reset-btn {
+    border-radius: 16px !important;
+    min-height: 48px;
   }
 
-  .profile-card .btn {
-    min-height: 46px;
+  .question-search-input,
+  .question-filter-select {
+    background: rgba(15, 23, 42, 0.9);
+    border: 1px solid rgba(148, 163, 184, 0.35);
+    color: var(--text-main);
+    box-shadow: inset 0 0 0 1px rgba(148, 163, 184, 0.08);
+  }
+
+  .question-search-btn {
+    background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
+    box-shadow: 0 0 18px rgba(99, 102, 241, 0.45);
+    border: none;
   }
 }

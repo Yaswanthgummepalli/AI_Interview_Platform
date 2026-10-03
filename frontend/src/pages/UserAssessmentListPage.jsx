@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import Layout from '../components/Layout';
 import { getAssessmentsApi } from '../services/assessmentService';
 import { ALLOWED_TECHNOLOGIES } from '../services/questionService';
-import '../styles/dashboard.css';
+import '../styles/UserAssessmentListPage.css';
 
 const UserAssessmentListPage = () => {
   const [assessments, setAssessments] = useState([]);
@@ -100,6 +100,7 @@ const UserAssessmentListPage = () => {
 
         {/* Filter Controls Bar */}
         <div
+          className="assessment-filter-bar"
           style={{
             backgroundColor: 'var(--bg-card)',
             border: '1px solid var(--border-color)',
@@ -109,6 +110,7 @@ const UserAssessmentListPage = () => {
           }}
         >
           <form
+            className="assessment-filter-form"
             onSubmit={handleSearchSubmit}
             style={{
               display: 'grid',
@@ -119,14 +121,14 @@ const UserAssessmentListPage = () => {
           >
             <input
               type="text"
-              className="form-input"
+              className="form-input assessment-search-input"
               placeholder="Search assessments by title, description, or topic..."
               value={filters.search}
               onChange={(e) => setFilters({ ...filters, search: e.target.value })}
             />
 
             <select
-              className="form-input"
+              className="form-input assessment-filter-select assessment-technology"
               value={filters.technology}
               onChange={(e) => setFilters({ ...filters, technology: e.target.value })}
             >
@@ -140,14 +142,14 @@ const UserAssessmentListPage = () => {
 
             <input
               type="text"
-              className="form-input"
+              className="form-input assessment-filter-select assessment-topic"
               placeholder="Topic"
               value={filters.topic}
               onChange={(e) => setFilters({ ...filters, topic: e.target.value })}
             />
 
             <select
-              className="form-input"
+              className="form-input assessment-filter-select assessment-difficulty"
               value={filters.difficulty}
               onChange={(e) => setFilters({ ...filters, difficulty: e.target.value })}
             >
@@ -157,15 +159,15 @@ const UserAssessmentListPage = () => {
               <option value="HARD">HARD</option>
             </select>
 
-            <div style={{ display: 'flex', gap: '0.5rem' }}>
-              <button type="submit" className="btn btn-primary" style={{ padding: '0.75rem 1.25rem' }}>
+            <div className="assessment-filter-actions" style={{ display: 'flex', gap: '0.5rem' }}>
+              <button type="submit" className="btn btn-primary assessment-search-btn" style={{ padding: '0.75rem 1.25rem' }}>
                 Search
               </button>
               {(filters.technology || filters.topic || filters.difficulty || filters.search) && (
                 <button
                   type="button"
                   onClick={handleResetFilters}
-                  className="btn btn-secondary"
+                  className="btn btn-secondary assessment-reset-btn"
                   style={{ padding: '0.75rem 1rem' }}
                 >
                   Reset

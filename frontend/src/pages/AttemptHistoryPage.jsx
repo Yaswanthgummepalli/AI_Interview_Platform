@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Layout from '../components/Layout';
 import { getUserAttemptsApi } from '../services/assessmentService';
-import '../styles/dashboard.css';
+import '../styles/AttemptsHistoryPage.css';
 
 const AttemptHistoryPage = () => {
   const navigate = useNavigate();
@@ -120,10 +120,11 @@ const AttemptHistoryPage = () => {
             </button>
           </div>
         ) : (
-          <div style={{ display: 'grid', gap: '1rem' }}>
+          <div className="attempts-history-list" style={{ display: 'grid', gap: '1rem' }}>
             {attempts.map((attempt) => (
               <div
                 key={attempt.attemptId}
+                className="attempt-history-card"
                 style={{
                   backgroundColor: 'var(--card-bg)',
                   border: '1px solid var(--border)',

@@ -221,11 +221,45 @@ const AdminAssessmentManagementPage = () => {
           </div>
         )}
 
+        <style>{`
+          @media (max-width: 720px) {
+            .admin-assessment-search-form {
+              grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+              gap: 0.75rem !important;
+            }
+
+            .admin-assessment-search-form .search-text-field {
+              grid-column: 1 / -1;
+            }
+
+            .admin-assessment-search-form .search-actions {
+              grid-column: 1 / -1;
+              display: grid !important;
+              grid-template-columns: 1fr 1fr;
+              width: 100%;
+              gap: 0.75rem;
+            }
+
+            .admin-assessment-search-form input,
+            .admin-assessment-search-form select,
+            .admin-assessment-search-form button {
+              min-height: 48px;
+              font-size: 0.95rem;
+              border-radius: 12px;
+            }
+
+            .admin-assessment-search-form .search-actions button {
+              width: 100%;
+              white-space: nowrap;
+            }
+          }
+        `}</style>
+
         <div style={{ backgroundColor: 'var(--bg-card)', border: '1px solid var(--border-color)', borderRadius: 'var(--radius-lg)', padding: '1.25rem', marginBottom: '2rem' }}>
-          <form onSubmit={handleSearchSubmit} style={{ display: 'grid', gridTemplateColumns: '2fr 1fr 1fr 1fr 1fr auto', gap: '1rem', alignItems: 'center' }}>
+          <form className="admin-assessment-search-form" onSubmit={handleSearchSubmit} style={{ display: 'grid', gridTemplateColumns: '2fr 1fr 1fr 1fr 1fr auto', gap: '1rem', alignItems: 'center' }}>
             <input
               type="text"
-              className="form-input"
+              className="form-input search-text-field"
               placeholder="Search by title, topic, or description..."
               value={filters.search}
               onChange={(e) => setFilters({ ...filters, search: e.target.value })}
@@ -271,7 +305,7 @@ const AdminAssessmentManagementPage = () => {
               <option value="false">Unpublished</option>
             </select>
 
-            <div style={{ display: 'flex', gap: '0.5rem' }}>
+            <div className="search-actions" style={{ display: 'flex', gap: '0.5rem' }}>
               <button type="submit" className="btn btn-primary" style={{ padding: '0.75rem 1.25rem' }}>
                 Search
               </button>

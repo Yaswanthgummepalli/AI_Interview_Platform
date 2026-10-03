@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import Layout from '../components/Layout';
 import { getQuestionsApi } from '../services/questionService';
 import { ALLOWED_TECHNOLOGIES } from '../services/questionService';
-import '../styles/dashboard.css';
+import '../styles/UserQuestionBank.css';
 
 const UserQuestionBankPage = () => {
   const [questions, setQuestions] = useState([]);
@@ -100,6 +100,7 @@ const UserQuestionBankPage = () => {
 
         {/* Filter Controls Bar */}
         <div
+          className="question-filter-bar"
           style={{
             backgroundColor: 'var(--bg-card)',
             border: '1px solid var(--border-color)',
@@ -109,6 +110,7 @@ const UserQuestionBankPage = () => {
           }}
         >
           <form
+            className="question-filter-form"
             onSubmit={handleSearchSubmit}
             style={{
               display: 'grid',
@@ -120,7 +122,7 @@ const UserQuestionBankPage = () => {
             <div>
               <input
                 type="text"
-                className="form-input"
+                className="form-input question-search-input"
                 placeholder="Search questions by text or topic..."
                 value={filters.search}
                 onChange={(e) => setFilters({ ...filters, search: e.target.value })}
@@ -129,7 +131,7 @@ const UserQuestionBankPage = () => {
 
             <div>
               <select
-                className="form-input"
+                className="form-input question-filter-select question-technology"
                 value={filters.technology}
                 onChange={(e) => setFilters({ ...filters, technology: e.target.value })}
               >
@@ -144,7 +146,7 @@ const UserQuestionBankPage = () => {
 
             <div>
               <select
-                className="form-input"
+                className="form-input question-filter-select question-difficulty"
                 value={filters.difficulty}
                 onChange={(e) => setFilters({ ...filters, difficulty: e.target.value })}
               >
@@ -157,7 +159,7 @@ const UserQuestionBankPage = () => {
 
             <div>
               <select
-                className="form-input"
+                className="form-input question-filter-select question-type"
                 value={filters.type}
                 onChange={(e) => setFilters({ ...filters, type: e.target.value })}
               >
@@ -167,15 +169,15 @@ const UserQuestionBankPage = () => {
               </select>
             </div>
 
-            <div style={{ display: 'flex', gap: '0.5rem' }}>
-              <button type="submit" className="btn btn-primary" style={{ padding: '0.75rem 1.25rem' }}>
+            <div className="question-filter-actions" style={{ display: 'flex', gap: '0.5rem' }}>
+              <button type="submit" className="btn btn-primary question-search-btn" style={{ padding: '0.75rem 1.25rem' }}>
                 Search
               </button>
               {(filters.technology || filters.difficulty || filters.type || filters.search) && (
                 <button
                   type="button"
                   onClick={handleResetFilters}
-                  className="btn btn-secondary"
+                  className="btn btn-secondary question-reset-btn"
                   style={{ padding: '0.75rem 1rem' }}
                 >
                   Reset

@@ -258,45 +258,127 @@
 
   .attempt-item {
     flex-direction: column;
-    align-items: flex-start;
+  }
+}
+
+@media (max-width: 480px) {
+  .dashboard-container {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
   }
 
-  .attempt-score {
-    text-align: left;
+  .attempts-history-list {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding-bottom: 0.75rem;
+    scroll-snap-type: x proximity;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
   }
 
-  .profile-grid {
-    grid-template-columns: 1fr !important;
-    gap: 1.25rem !important;
+  .attempts-history-list::-webkit-scrollbar {
+    display: none;
   }
 
-  .profile-card {
-    padding: 1.25rem !important;
+  .attempt-history-card {
+    min-width: 88vw;
+    max-width: 88vw;
+    flex: 0 0 88vw;
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: flex-start !important;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 1rem 1.1rem !important;
+    border-radius: 1.25rem !important;
+    border: 1px solid rgba(148, 163, 184, 0.2) !important;
+    background: rgba(15, 23, 42, 0.9) !important;
+    box-shadow: inset 0 0 0 1px rgba(96, 165, 250, 0.06);
+    scroll-snap-align: start;
   }
 
-  .profile-card h3 {
-    font-size: 1.15rem !important;
-    margin-bottom: 1rem !important;
+  .attempt-history-card > div:first-child {
+    min-width: 0;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
   }
 
-  .profile-card .auth-form {
-    gap: 0.9rem !important;
+  .attempt-history-card > div:first-child h3 {
+    margin: 0 !important;
+    font-size: 1.2rem !important;
+    line-height: 1.2;
+    font-weight: 700;
+    color: var(--text-main);
   }
 
-  .profile-card .form-group {
-    margin-bottom: 0.1rem;
+  .attempt-history-card > div:first-child > div:nth-child(2) {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin: 0;
+    color: var(--text-muted);
+    font-size: 0.98rem;
   }
 
-  .profile-card .form-label {
-    font-size: 0.8rem;
+  .attempt-history-card > div:first-child > div:nth-child(2) span {
+    color: var(--text-main);
+    font-size: 0.96rem;
   }
 
-  .profile-card .form-input {
-    min-height: 46px;
-    font-size: 0.95rem;
+  .attempt-history-card > div:first-child > div:nth-child(2) span[style*="background-color"] {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.35rem 0.6rem;
+    border-radius: 0.45rem;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    min-width: 68px;
   }
 
-  .profile-card .btn {
-    min-height: 46px;
+  .attempt-history-card > div:first-child > div:last-child {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.8rem 0.9rem;
+    align-items: start;
+  }
+
+  .attempt-history-card > div:first-child > div:last-child > div {
+    min-width: 0;
+  }
+
+  .attempt-history-card > div:first-child > div:last-child p {
+    margin: 0;
+    line-height: 1.4;
+  }
+
+  .attempt-history-card > div:first-child > div:last-child p:first-child {
+    color: var(--text-muted);
+    font-size: 0.7rem;
+    margin-bottom: 0.15rem;
+  }
+
+  .attempt-history-card > div:first-child > div:last-child p:last-child {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--text-main);
+  }
+
+  .attempt-history-card .btn {
+    min-width: 120px;
+    padding: 0.95rem 1.05rem !important;
+    white-space: nowrap;
+    align-self: center;
+    border-radius: 1.2rem !important;
+    font-size: 1rem !important;
+    font-weight: 700 !important;
+    box-shadow: 0 0 18px rgba(99, 102, 241, 0.42);
   }
 }

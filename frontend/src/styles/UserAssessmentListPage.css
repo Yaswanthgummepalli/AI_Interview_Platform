@@ -2,6 +2,25 @@
   padding: 3rem 0;
 }
 
+.assessment-filter-bar {
+  overflow: hidden;
+}
+
+.assessment-filter-form {
+  width: 100%;
+}
+
+.assessment-search-input,
+.assessment-filter-select {
+  min-width: 0;
+}
+
+.assessment-filter-actions {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
 .eyebrow {
   margin: 0 0 0.5rem;
   color: #a78bfa;
@@ -264,39 +283,37 @@
   .attempt-score {
     text-align: left;
   }
+}
 
-  .profile-grid {
-    grid-template-columns: 1fr !important;
-    gap: 1.25rem !important;
+@media (max-width: 720px) {
+  .assessment-filter-form {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
-  .profile-card {
-    padding: 1.25rem !important;
+  .assessment-search-input {
+    grid-column: 1 / -1;
   }
 
-  .profile-card h3 {
-    font-size: 1.15rem !important;
-    margin-bottom: 1rem !important;
+  .assessment-technology,
+  .assessment-topic,
+  .assessment-difficulty {
+    min-width: 0;
   }
 
-  .profile-card .auth-form {
-    gap: 0.9rem !important;
+  .assessment-filter-actions {
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    width: 100%;
   }
 
-  .profile-card .form-group {
-    margin-bottom: 0.1rem;
+  .assessment-search-btn,
+  .assessment-reset-btn {
+    width: 100%;
+    justify-content: center;
   }
 
-  .profile-card .form-label {
-    font-size: 0.8rem;
-  }
-
-  .profile-card .form-input {
-    min-height: 46px;
-    font-size: 0.95rem;
-  }
-
-  .profile-card .btn {
-    min-height: 46px;
+  .assessment-search-btn {
+    min-height: 48px;
   }
 }

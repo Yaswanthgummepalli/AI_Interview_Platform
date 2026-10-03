@@ -198,6 +198,40 @@ const AdminQuestionManagementPage = () => {
           </div>
         )}
 
+        <style>{`
+          @media (max-width: 720px) {
+            .admin-question-search-form {
+              grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+              gap: 0.75rem !important;
+            }
+
+            .admin-question-search-form .search-text-field {
+              grid-column: 1 / -1;
+            }
+
+            .admin-question-search-form .search-actions {
+              grid-column: 1 / -1;
+              display: grid !important;
+              grid-template-columns: 1fr;
+              width: 100%;
+              gap: 0.75rem;
+            }
+
+            .admin-question-search-form input,
+            .admin-question-search-form select,
+            .admin-question-search-form button {
+              min-height: 48px;
+              font-size: 0.95rem;
+              border-radius: 12px;
+            }
+
+            .admin-question-search-form .search-actions button {
+              width: 100%;
+              white-space: nowrap;
+            }
+          }
+        `}</style>
+
         {/* Search & Filter Bar */}
         <div
           style={{
@@ -209,6 +243,7 @@ const AdminQuestionManagementPage = () => {
           }}
         >
           <form
+            className="admin-question-search-form"
             onSubmit={handleSearchSubmit}
             style={{
               display: 'grid',
@@ -219,7 +254,7 @@ const AdminQuestionManagementPage = () => {
           >
             <input
               type="text"
-              className="form-input"
+              className="form-input search-text-field"
               placeholder="Search by text, topic, or tag..."
               value={filters.search}
               onChange={(e) => setFilters({ ...filters, search: e.target.value })}
@@ -259,9 +294,11 @@ const AdminQuestionManagementPage = () => {
               <option value="SUBJECTIVE">SUBJECTIVE</option>
             </select>
 
-            <button type="submit" className="btn btn-primary" style={{ padding: '0.75rem 1.25rem' }}>
-              Search
-            </button>
+            <div className="search-actions" style={{ display: 'flex', gap: '0.5rem' }}>
+              <button type="submit" className="btn btn-primary" style={{ padding: '0.75rem 1.25rem' }}>
+                Search
+              </button>
+            </div>
           </form>
         </div>
 

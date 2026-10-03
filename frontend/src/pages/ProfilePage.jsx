@@ -170,9 +170,10 @@ const ProfilePage = () => {
           </div>
         </div>
 
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '2rem' }}>
+        <div className="profile-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '2rem' }}>
           {/* Profile Information & Edit Card */}
           <div
+            className="profile-card"
             style={{
               backgroundColor: 'var(--bg-card)',
               border: '1px solid var(--border-color)',
@@ -301,6 +302,7 @@ const ProfilePage = () => {
 
           {/* Change Password Card */}
           <div
+            className="profile-card"
             style={{
               backgroundColor: 'var(--bg-card)',
               border: '1px solid var(--border-color)',
